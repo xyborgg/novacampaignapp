@@ -1,0 +1,111 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+        <title> {{ title }} </title>
+
+        <!-- Page Content -->
+        {% block content %}
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-wrapper collapse in" aria-expanded="true">
+                                <div class="panel-body">
+                                    <form action="#" method="POST" enctype="multipart/form-data">
+                                         {% csrf_token %}
+                                        <div class="form-body">
+                                            <div class="m-b-56">
+                                                <h3 class="box-title m-b-10">Create Campaign</h3>
+                                                <hr />
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 ">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Campaign Name</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><i class=" icon-notebook"></i></div>
+                                                            <input required name="title" type="text" class="form-control" id="exampleInputuname" placeholder="Campaign Title">
+                                                        </div>
+                                                    </div>
+                                                </div>
+<!--                                                <div class="col-md-12 ">-->
+<!--                                                    <div class="form-group">-->
+<!--                                                        <label class="control-label">Description</label>-->
+<!--                                                        <input type="text" id="description" class="form-control" placeholder="Briefly describe the campaign"> -->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                                <div class="col-md-12 ">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Description </label>
+                                                           <div class="input-group">
+                                                               <div class="input-group-addon"><i class=" icon-pencil"></i></div>
+                                                               <textarea name="details" class="form-control" rows="4" placeholder="Briefly describe the campaign"></textarea>
+                                                           </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 ol-md-6 col-xs-12">
+                                                    <div class="form-group">
+                                                        <label for="input-file-now">Upload Campaign Image</label>
+                                                        <input type="file" id="input-file-now" class="dropify"  accept="image/gif,image/jpeg,image/png" name="file" data-max-file-size="25M"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<!--                                        <label for="input-file-max-fs"> Max File Size 5mb </label>-->
+                                        <div class="form-actions m-t-40">
+                                            <button type="submit" class="btn btn-danger"> <i class="fa fa-check"></i> Create</button>
+                                            <button type="button" class="btn btn-default" href="/AllCampaigns"> Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}
+
+
+
+
+<script>
+{% block jquery %}
+    $(function() {
+        // Basic
+        $('.dropify').dropify();
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+ {% endblock %}
+    </script>
+

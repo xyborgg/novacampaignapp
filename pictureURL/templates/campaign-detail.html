@@ -1,0 +1,129 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+    <title>{{ title }}</title>
+
+{% block content %}
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white-box">
+                    <div style="float:right;">
+                        <a href= "{% url 'delete_campaign' details.pk %} " class="dropdown-toggle waves-effect waves-light font-15"  style="color:black; font-weight:bold;" ><i class=" icon-trash"> </i> </a>&nbsp;
+                        <a href="{% url 'edit_campaign' details.pk %} " class="dropdown-toggle waves-effect waves-light font-15" style=" color:black; font-weight:bold;" ><i class=" icon-pencil"></i> Edit </a>
+                    </div>
+                    <h4 class="box-title">Campaign Details</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+<!--                            <div class="white-box text-center">-->
+                                <img src=" /static/hbb/{{details.image_path}} " id="product-image" class="img-responsive" />
+<!--                            </div>-->
+<!--                            <div class="pro-photos">-->
+<!--                                <div class="photos-item item-active">-->
+<!--                                    <img src="{% static 'plugins/images/chair.jpg' %}">-->
+<!--                                </div>-->
+<!--                                <div class="photos-item">-->
+<!--                                    <img src="{% static 'plugins/images/chair2.jpg' %}">-->
+<!--                                </div>-->
+<!--                                <div class="photos-item">-->
+<!--                                    <img src="{static 'plugins/images/chair3.jpg' %}">-->
+<!--                                </div>-->
+<!--                                <div class="photos-item">-->
+<!--                                    <img src="{% static 'plugins/images/chair4.jpg' %}">-->
+<!--                                </div>-->
+<!--                                <div class="photos-item">-->
+<!--                                    <img src="{static 'plugins/images/chair2.jpg' %}">-->
+<!--                                </div>-->
+<!--                                <div class="photos-item">-->
+<!--                                    <img src="{% static 'plugins/images/chair3.jpg' %}">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <a href="/MediaUpload" class="btn btn-danger"> Add Media </a>-->
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-md-8 col-sm-6">
+                            <h4 class="box-title m-t-0">{{details.title}}</h4>
+<!--                            <h2 class="pro-price m-b-0 m-t-20">&#36;72-->
+<!--                                <span class="old-price">&#36;100</span>-->
+<!--                                <span class="text-danger">28% off</span>-->
+<!--                            </h2>-->
+                            <hr>
+                            <p>{{ details.details }}</p>
+                            <hr>
+                            <ul class="list-icons">
+                                <li><i class="fa fa-check text-success"></i> Sturdy structure</li>
+                                <li><i class="fa fa-check text-success"></i> Designed to foster easy portability</li>
+                                <li><i class="fa fa-check text-success"></i> Perfect furniture to flaunt your wonderful collectibles</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h3 class="box-title m-t-40"> Campaign Info</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+<!--                                    <tr><td width="390"> Campaign Name </td>-->
+<!--                                        <td> {{details.title}} </td>-->
+<!--                                    </tr>-->
+                                    <tr>
+                                        <td> File Name </td>
+                                        <td> {{details.file_name }} </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Date Created </td>
+                                        <td> {{ details.date_created }} </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Image Path </td>
+                                        <td> {{details.image_path}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Uid  </td>
+                                        <td> {{ details.auid }}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!--Style Switcher -->
+    <script src="{5 static 'plugins/components/styleswitcher/jQuery.style.switcher.js' %}"></script>
+    <script type="text/javascript">
+    {% block jquery %}
+    $(function() {
+        $('.icolors li').on("click", function() {
+            $('.icolors li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.photos-item').on("click", function() {
+            var src = $(this).children().attr('src');
+            $('#product-image').attr('src', src);
+            $('.photos-item').removeClass('item-active');
+            $(this).addClass('item-active');
+        });
+    });
+    {% endblock %}
+    </script>

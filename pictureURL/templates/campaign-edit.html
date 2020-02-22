@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+{% load static %}
+
+<!--    <![endif]&ndash;&gt;-->
+{% block content %}
+
+        <div class="container-fluid">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Submit">
+                        <div class="form-group">
+
+                            <label for="exampleInputuname">Campaign Title </label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class=" icon-notebook"></i></div>
+                                <input required name="title" type="text" class="form-control" id="exampleInputuname" placeholder="Campaign Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputuname"> Description </label>
+                            <div class="input-group">
+                                 <div class="input-group-addon"><i class=" icon-pencil"></i></div>
+                                 <textarea class="form-control" rows="5" name="details"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+<!--                                        <label for="input-file-max-fs">You can add a max file size</label>-->
+                                <div class="dropify-wrapper">
+                                    <div class="dropify-message">
+<!--                                        <span class="file-icon"></span> <p>Drag and drop a file here or click</p>-->
+<!--                                <p class="dropify-error">Ooops, something wrong appended.</p>-->
+                                    </div>
+                                    <div class="dropify-loader" style="display: none;">
+
+                                    </div>
+                                    <div class="dropify-errors-container">
+                                    <ul></ul>
+                                    </div>
+                                    <input type="file" required id="input-file-max-fs" accept="image/gif,image/jpeg,image/png" name="file" class="dropify" data-max-file-size="25M">
+<!--                                    <button type="button" class="dropify-clear">Remove</button>-->
+                                    <div class="dropify-preview" style="display: none;">
+                                        <span class="dropify-render"></span>
+                                        <div class="dropify-infos">
+                                            <div class="dropify-infos-inner">
+                                                <p class="dropify-filename">
+                                                    <span class="file-icon"></span>
+                                                    <span class="dropify-filename-inner">bg-1.png</span>
+                                                </p>
+<!--                                   <p class="dropify-infos-message">Drag and drop or click to replace</p>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br>
+                            <label for="input-file-max-fs">Max File Size 5mb </label>
+                        </div>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+<!--                                <button type="submit" class="btn btn-inverse waves-effect waves-light"> Cancel</button>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock content %}
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{% static 'plugins/components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/jasny-bootstrap.js' %}"></script>
+     jQuery file upload
+    <script src="{% static 'plugins/components/dropify/dist/js/dropify.min.js' %}"></script>
+    <script>
+    $(function() {
+        // Basic
+        $('.dropify').dropify();
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+    </script>
+    <!--Style Switcher -->
+    <script src="{% static 'plugins/components/styleswitcher/jQuery.style.switcher.js' %}"></script>
+

@@ -1,0 +1,163 @@
+{% extends 'new/base.html' %}
+{% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>NOVA Campaign Tool : Manage</title>
+    <!-- ===== Bootstrap CSS ===== -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- ===== Plugin CSS ===== -->
+    <link href="../plugins/components/Magnific-Popup-master/dist/magnific-popup.css" rel="stylesheet">
+    <!-- ===== Animation CSS ===== -->
+    <link href="css/animate.css" rel="stylesheet">
+    <!-- ===== Custom CSS ===== -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- ===== Color CSS ===== -->
+    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ {% block content %}
+        <!-- Page Content -->
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <div class="panel-wrapper collapse in" aria-expanded="true">
+                                    <h3 class="box-title">Manage Campaigns</h3>
+                                </div>
+                                <hr />
+                                <div class="row el-element-overlay m-b-20">
+
+                                    <!-- /.usercard -->
+                                    {% for photo in allphoto %}
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="white-box">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1 h250"> <img src="/static/hbb/{{photo.image_path}}" />
+                                                    <div class="el-overlay btn default btn-outline image-popup-vertical-fit" href="/static/hbb/{{photo.image_path}}">
+                                                        <ul class="el-info">
+                                                            <li><a class="btn default btn-outline href="#"><i class="icon-magnifier-add"></i></a></li>
+                                                            <li><a class="btn default btn-outline" href="{% url 'delete_campaign' photo.pk %}"><i class="icon-trash"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="el-card-content">
+                                                    <h3 class="box-title f-18"> Name: {{ photo.title }}</h3> <small> Created On : {{ photo.date_created }}</small>
+                                                    <br/> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor  %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box user-table">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h4 class="box-title">All Campaigns </h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select class="custom-select">
+                                        <option selected>Sort by</option>
+                                        <option value="1">Recently Added</option>
+                                        <option value="2">Date Created</option>
+                                        <option value="3">Recently Modified</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>URL</th>
+                                            <th>Campaign Name</th>
+                                            <th>Date Created</th>
+                                            <th>Publish</th>
+                                            <th>Edit</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            {% for photo in allphoto %}
+                                            <td>
+                                                <a href="javascript:void(0);" class="text-link" id="copyInput"> {{ photo.short_link }}</a>
+                                                <span class="float-right" onclick="copyFunction"><i class="btn-link btn-copy icon-docs fa-fw copy-icon font-16" aria-hidden="true"></i></span>
+                                            </td>
+                                            <td>{{photo.title}}</td>
+                                            <td> <span class="text-muted"> <i class="fa fa-clock-o"></i>&nbsp; {{ photo.date_created }}</span> </td>
+                                            <td>
+                                                <a href="/smsform/{{photo.auid}}"
+                                                    class="btn btn-default btn-outline btn-success btn-white font-16"><i
+                                                        class="fa  fa-location-arrow" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);"
+                                                    class="btn btn-default btn-outline btn-warning font-16"><i
+                                                        class="fa fa-edit" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="/campaigndetail/{{photo.auid}}"
+                                                    class="btn btn-default btn-outline btn-primary font-16"><i
+                                                        class="fa fa-chain" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                     {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul class="pagination">
+                                <li class="disabled"> <a href="#">1</a> </li>
+                                <li class="active"> <a href="#">2</a> </li>
+                                <li> <a href="#">3</a> </li>
+                                <li> <a href="#">4</a> </li>
+                                <li> <a href="#">5</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- ===== Right-Sidebar ===== -->
+{% endblock %}
+
+
+    =============================== -->
+    <!-- ===== jQuery ===== -->
+    <script src="../plugins/components/jquery/dist/jquery.min.js"></script>
+    <!-- ===== Bootstrap JavaScript ===== -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ===== Slimscroll JavaScript ===== -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!-- ===== Wave Effects JavaScript ===== -->
+    <script src="js/waves.js"></script>
+    <!-- ===== Menu Plugin JavaScript ===== -->
+    <script src="js/sidebarmenu.js"></script>
+    <!-- ===== Custom JavaScript ===== -->
+    <script src="js/custom.js"></script>
+    <!-- ===== Plugin JS ===== -->
+    <script src="../plugins/components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+    <script src="../plugins/components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+    <!-- ===== Style Switcher JS ===== -->
+    <script src="../plugins/components/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+</html>

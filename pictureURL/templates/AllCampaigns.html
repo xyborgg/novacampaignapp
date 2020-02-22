@@ -1,0 +1,133 @@
+{% extends 'index.html' %}
+{% load static %}
+
+<!--   <title> {{ page_title }} </title>-->
+<!--      &lt;!&ndash; ===== Bootstrap CSS ===== &ndash;&gt;-->
+<!--    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">-->
+<!--    &lt;!&ndash; ===== Plugin CSS ===== &ndash;&gt;-->
+<!--    <link href="{% static 'plugins/components/Magnific-Popup-master/dist/magnific-popup.css' %}" rel="stylesheet">-->
+<!--    &lt;!&ndash; ===== Animation CSS ===== &ndash;&gt;-->
+<!--    <link href="{% static 'css/animate.css' %}" rel="stylesheet">-->
+<!--    &lt;!&ndash; ===== Custom CSS ===== &ndash;&gt;-->
+<!--    <link href="{% static 'css/PictureURLstyle.css" rel="stylesheet">-->
+<!--    &lt;!&ndash; ===== Color CSS ===== &ndash;&gt;-->
+<!--    <link href="{% static 'css/colors/default.css' %}" id="theme" rel="stylesheet">-->
+<!--    &lt;!&ndash; HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+<!--    &lt;!&ndash; WARNING: Respond.js doesn't work if you view the page via file:// &ndash;&gt;-->
+<!--    &lt;!&ndash;[if lt IE 9]>-->
+<!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+<!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+<!--    <![endif]&ndash;&gt;-->
+
+{% block content %}
+
+<div class="container-fluid">
+<!--    <div class="col-lg-2 col-sm-4 col-xs-12" style="position:absolute; right:0;">-->
+<!--        <a href="/NewCampaign" class="btn btn-block btn-danger" target="_blank"><i class="icon-plus"> New Campaign </i> </a>-->
+<!--    </div>-->
+    <div class="row el-element-overlay m-b-20">
+        <div class="col-md-12">
+            <h4> All Campaigns</h4>
+            <hr>
+        </div>
+        <!-- /.usercard -->
+        {% for photo in allphoto %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="white-box">
+                <div class="el-card-item">
+                    <div class="el-card-avatar el-overlay-1"> <img src="/static/hbb/{{photo.image_path}}" />
+                        <div class="el-overlay">
+                            <ul class="el-info">
+                                <li><a class="btn default btn-outline image-popup-vertical-fit" href="{% url 'campaign_banner' photo.auid %}"><i class="icon-magnifier"></i></a></li>
+                                <li><a class="btn default btn-outline" href="{% url 'delete_campaign' photo.pk %}"><i class="icon-trash"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="el-card-content">
+                        <h5 class="box-title"> </h5><small>Name: {{ photo.title }}</small>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="white-box">
+        <h3 class="box-title m-b-0"> All Campaigns</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th> Url </th>
+                    <th></th>
+                    <th>Campaign Name </th>
+                    <th>Date Created </th>
+<!--                    <th>File Name </th>-->
+<!--                    <th>Image Path</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                {% for photo in allphoto %}
+                <tr>
+                    <td><a href="{% url 'campaign_banner' photo.auid %}" target="_blank" > {{ photo.short_link }}</a> <td> <i class="icon-docs"> </i> </td></td>
+                    <td>{{photo.title}}</td>
+                    <td><span class="text-muted"> <i class="fa fa-clock-o"></i>&nbsp; {{ photo.date_created }}</span> </td>
+<!--                    <td>{{photo.file_name }}</td>-->
+                    <td><a href="/smsform/" >
+                        <div class="label label-table label-success"> Push </div>
+                    </a>
+                    </td>
+<!--                    <td>{{photo.image_path}}</td>&ndash;&gt;-->
+                    <td><a href="/campaigndetail/{{photo.auid}}" > <i class="icon-link"></i> view more .... </a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if allphoto.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ allphoto.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ allphoto.number }} of {{ allphoto.paginator.num_pages }}.
+                    </span>
+                    {% if allphoto.has_next %}
+                    <a href="?page={{ allphoto.next_page_number }}">next</a>
+                    <a href="?page={{ allphoto.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+<!--                                 <ul class="pagination">-->
+<!--                                     <li class="disabled"> <a href="#">1</a> </li>-->
+<!--                                     <li class="active"> <a href="#">2</a> </li>-->
+<!--                                     <li> <a href="#">3</a> </li>-->
+<!--                                     <li> <a href="#">4</a> </li>-->
+<!--                                     <li> <a href="#">5</a> </li>-->
+<!--                                 </ul>-->
+<!--                            </div>-->
+<!--                </div>-->
+        </div>
+    </div>
+
+            <!-- /.container-fluid -->
+{% endblock content %}
+        <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+
+</div>
+
+<!--    <script src="{% static 'plugins/components/jquery/dist/jquery.min.js' %}"></script>-->
+<!--    &lt;!&ndash; Bootstrap Core JavaScript &ndash;&gt;-->
+<!--    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>-->
+<!--    &lt;!&ndash; Menu Plugin JavaScript &ndash;&gt;-->
+<!--    <script src="{% static 'js/sidebarmenu.js' %}"></script>-->
+<!--    &lt;!&ndash;slimscroll JavaScript &ndash;&gt;-->
+<!--    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>-->
+<!--    &lt;!&ndash;Wave Effects &ndash;&gt;-->
+<!--    <script src="{% static 'js/waves.js' %}"></script>-->
+<!--    &lt;!&ndash; Magnific popup JavaScript &ndash;&gt;-->
+<!--    <script src="{% static 'plugins/components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js' %}"></script>-->
+<!--    <script src="{% static 'plugins/components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js' %}"></script>-->
+    <!-- Custom Theme JavaScript -->
+<!--    <script src="{% static 'js/custom.js' %}"></script>-->

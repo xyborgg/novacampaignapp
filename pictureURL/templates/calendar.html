@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+    <title>{{ page_title }}</title>
+    <!-- ===== Bootstrap CSS ===== -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- ===== Plugin CSS ===== -->
+    <link href="{% static 'plugins/components/calendar/dist/fullcalendar.css' %}" rel="stylesheet" />
+    <!-- ===== Animation CSS ===== -->
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- ===== Custom CSS ===== -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- ===== Color CSS ===== -->
+    <link href="{% static 'css/colors/default.css' %}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+        <!-- ===== Top-Navigation ===== -->
+
+        <!-- ===== Top-Navigation-End ===== -->
+        <!-- ===== Left-Sidebar ===== -->
+        <!-- Page Content -->
+        {% block content %}
+
+            <div class="container-fluid">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box cal-event">
+                            <h3 class="box-title">Drag and drop your event</h3>
+                            <div class="m-t-20">
+                                <div class="calendar-event" data-class="bg-primary">My Event One <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                                <div class="calendar-event" data-class="bg-success">My Event Two <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                                <div class="calendar-event" data-class="bg-warning">My Event Three <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                                <div class="calendar-event" data-class="bg-custom">My Event Four <a href="javascript:void(0);" class="remove-calendar-event"><i class="ti-close"></i></a></div>
+                                <input type="text" placeholder="Add Event and hit enter" class="form-control add-event m-t-20"> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <!-- ===== Right-Sidebar-End ===== -->
+        </div>
+        {% endblock %}
+        <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{% static 'plugins/components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- Calendar JavaScript -->
+    <script src="{% static 'plugins/components/calendar/jquery-ui.min.js' %}" ></script>
+    <script src="{% static 'plugins/components/moment/moment.js' %}"></script>
+    <script src="{% static 'plugins/components/calendar/dist/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'plugins/components/calendar/dist/jquery.fullcalendar.js' %}"></script>
+    <!--Style Switcher -->
+    <script src="{% static 'plugins/components/styleswitcher/jQuery.style.switcher.js' %}"></script>
