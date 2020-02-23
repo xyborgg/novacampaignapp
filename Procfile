@@ -1,1 +1,1 @@
-web: gunicorn scannerr.wsgi
+web: gunicorn scannerr.wsgi:application --log-file
