@@ -1,0 +1,59 @@
+{% load static %}
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title></title>
+    <!-- ===== Bootstrap CSS ===== -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- ===== Plugin CSS ===== -->
+    <!-- ===== Animation CSS ===== -->
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- ===== Custom CSS ===== -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- ===== Color CSS ===== -->
+    <link href="{% static 'css/colors/default.css' %}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+        <!-- Page Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                                <img src="/static/hbb/{{model.image_path}}" class="img-responsive" /> </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div>     <!-- /.container-fluid -->
+        <footer class="footer t-a-c"> © 2019 Airtel
+        </footer>
+        </div>
+
+    <!-- ===== jQuery ===== -->
+    <script src="{% static '/plugins/components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- ===== Bootstrap JavaScript ===== -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- ===== Slimscroll JavaScript ===== -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!-- ===== Wave Effects JavaScript ===== -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- ===== Menu Plugin JavaScript ===== -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!-- ===== Custom JavaScript ===== -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- ===== Plugin JS ===== -->
+    <!-- ===== Style Switcher JS ===== -->
+    <script src="{% static 'plugins/components/styleswitcher/jQuery.style.switcher.js' %}"></script>

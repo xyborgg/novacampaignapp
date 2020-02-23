@@ -61,7 +61,8 @@ def logout(request):
     Dashboard View 
 '''
 @login_required
-def dashboard(request, template='new/home.html'):
+def dashboard(request):
+    template = 'home.html'
     # allphoto = Pictureurl.objects.all()
 
     context = {'title':'Dashboard',
@@ -72,7 +73,7 @@ def dashboard(request, template='new/home.html'):
 
 class Upload_Campaign(View):
     form_class = UploadphotoForm
-    template = 'new/campaign.html'
+    template = 'campaign.html'
 
     def get(self, request):
         form = self.form_class(None)
@@ -133,7 +134,7 @@ class Upload_Campaign(View):
 
 ''' all  campaigns view  '''
 def campaign_list(request):
-    template = 'New/Manage-Campaigns.html'
+    template = 'Manage-Campaigns.html'
     allphoto = Pictureurl.objects.all()
     paginator = Paginator(allphoto, 5)
     host = request.get_host
@@ -212,8 +213,6 @@ def edit(request, id):
         }
 
     return render(request, template, context)
-
-
 
 
 def delete_campaign(request,pk):

@@ -131,7 +131,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-MEDIA_URL = '/Users/user/Documents/hbb/'
+# MEDIA_URL = '/Users/user/Documents/hbb/'
+MEDIA_URL = 'airtel/static/img'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
