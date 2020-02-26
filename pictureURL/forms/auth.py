@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import ( authenticate, get_user_model )
 from django.conf import settings
 import requests
+from django.forms import modelformset_factory
+
 from pictureURL.models import Pictureurl
 
 
@@ -30,6 +32,8 @@ class EditphotoForm(forms.ModelForm):
 
                   ]
 
+
+EditphotoFormset = modelformset_factory(Pictureurl, form=EditphotoForm, extra=0)
 
 class PublishForm(forms.Form):
     class Meta:

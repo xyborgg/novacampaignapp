@@ -259,7 +259,7 @@
                                 </span></a>
                         </li>
                         <li>
-                            <a class=" {% if url_name == '' %} waves-effect active {% endif %} " href="{% url 'new_campaign" aria-expanded="false"><i
+                            <a class= "{% if url_name == 'new_campaign' %} waves-effect active {% endif %} " href="{% url 'new_campaign' %}" aria-expanded="false"><i
                                     class="icon-paper-plane fa-fw"></i> <span class="hide-menu"> New Campaign </span></a>
                         </li>
                         <li>
@@ -328,7 +328,7 @@
     <!-- jQuery file upload -->
     <script src="{% static 'plugins2/components/dropify/dist/js/dropify.min.js' %}"></script>
     <script>
-        $(document).ready(function(e){
+        $(document).ready(function(){
         {% block jquery %}
 
         {% endblock %}

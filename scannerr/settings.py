@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import django_heroku
+# import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +26,7 @@ SECRET_KEY = '3+drmpm!id+u9b*ele%vak$h%-jpbem=e5l6^e=v$-ad(&%(p%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1']
+ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1', 'https://novacampaignapp.herokuapp.com']
 
 LOGIN_URL = "/login"
 
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +54,7 @@ MIDDLEWARE = [
     'detect.middleware.UserAgentDetectionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'scannerr.urls'
@@ -131,11 +131,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-# MEDIA_URL = '/Users/user/Documents/hbb/'
-MEDIA_URL = 'app/airtel/static/img'
+MEDIA_URL = '/Users/user/Documents/hbb/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

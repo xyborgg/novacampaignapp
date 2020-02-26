@@ -13,17 +13,18 @@ class Pictureurl(models.Model):
     short_link = models.CharField(max_length=50, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.file_name
 
     class Meta:
         ordering = ["-date_created"]
 
 class Analytics (models.Model):
-    device  = models.CharField(max_length=50, null=True)
+    device = models.CharField(max_length=50, null=True)
     ip = models.CharField(max_length=250)
     campaign_url = models.ForeignKey(Pictureurl, on_delete=models.CASCADE)
     timestamps = models.DateTimeField(auto_now_add=True)
+    count = models.IntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.campaign_url
