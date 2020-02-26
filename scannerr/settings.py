@@ -9,8 +9,7 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
-# import django_heroku
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +25,7 @@ SECRET_KEY = '3+drmpm!id+u9b*ele%vak$h%-jpbem=e5l6^e=v$-ad(&%(p%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1', 'https://novacampaignapp.herokuapp.com']
+ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1', ]
 
 LOGIN_URL = "/login"
 
@@ -134,7 +133,7 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_URL = '/Users/user/Documents/hbb/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
