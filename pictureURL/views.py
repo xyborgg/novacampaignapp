@@ -5,6 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.views.generic import View, UpdateView, ListView
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -72,9 +73,14 @@ def dashboard(request):
                }
     return render(request, template, context)
 
+
+
+
+
 class Upload_Campaign(View):
     form_class = UploadphotoForm
     template = 'campaign.html'
+    success_url = reverse_lazy('campaign_list')
 
     def get(self, request):
         form = self.form_class(None)
@@ -93,6 +99,8 @@ class Upload_Campaign(View):
         picture = Pictureurl()
         picture.title = request.POST.get('title')
         picture.details = request.POST.get('details')
+        picture.hyperlink = request.POST.get('hyperlink')
+        picture.action =  request.POST.get('action')
         picture.date_created = datetime.now()
         picture.auid = str(uuid.uuid4())
         new_file_name = picture.auid
@@ -140,10 +148,9 @@ class Upload_Campaign(View):
 ''' all  campaigns view  '''
 def campaign_list(request):
     template = 'Manage-Campaigns.html'
-    allphoto = Pictureurl.objects.all()
-    paginator = Paginator(allphoto, 5)
-    host = request.get_host
-    page = request.GET.get('page')
+    user_list = Pictureurl.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(user_list, 5)
     try:
         items = paginator.page(page)
     except PageNotAnInteger:
@@ -152,12 +159,12 @@ def campaign_list(request):
         items = paginator.page(paginator.num_pages)
 
     context = {
-        "allphoto": items,
+        # "allphoto": items,
         'title': 'All Campaigns',
-
+        "items": items
     }
 
-    print(host)
+
     return render(request, template, context)
 
 def campaigndetail(request, auid,):
@@ -214,7 +221,8 @@ class EditListView(ListView):
         item_pk = self.kwargs["id"]
         item = get_object_or_404(Pictureurl, pk=item_pk)
         print(item)
-        queryset = Pictureurl.objects.filter(item=item)
+        queryset = Pictureurl.objects.filter(
+            item=item)
         return queryset
         # return item
 
@@ -269,19 +277,14 @@ def delete_campaign(request,pk):
 
 
 def campaign(request, auid):
+    template = 'ads.html'
     if Pictureurl.objects.filter(auid=auid).exists():
         model = Pictureurl.objects.get(auid=auid)
         context = dict()
         context['model'] = model
-        return render(request, "campaign-page.html",context)
+        return render(request, template ,context)
     else:
         return Http404
-
-def calender(request):
-    context = {
-        'title': 'Calender'
-    }
-    return render(request, 'calendar.html', context)
 
 
 class Publish(View):
@@ -289,8 +292,8 @@ class Publish(View):
     template = "smsform.html"
 
 
-    def get(self, request, auid ):
-        details = Pictureurl.objects.get(auid=auid)
+    def get(self, request):
+        details = Pictureurl.objects.all()
         form = self.form_class(None)
         context = {'form': form,
                    'title': 'Publish',
@@ -313,6 +316,7 @@ class Publish(View):
 
 
 class Analytic (View):
+    model = Analytics
 
     def get(self, requests):
         """
@@ -320,6 +324,13 @@ class Analytic (View):
         :return:
         """
         obj = get_object_or_404()
+
+        Analytics.ip = requests.META.get('HTTP_X_FORWARDED_FOR')
+        x_forwarded_for = Analytics.ip
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = requests.META.get('REMOTE_ADDR')
 
         ua = requests.META['HTTP_USER_AGENT']
         device = ""

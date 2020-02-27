@@ -6,7 +6,8 @@ from .models import Pictureurl, Analytics
 
 
 class PictureUrlAdmin(admin.ModelAdmin):
-    list_display = ["file_name", "date_created","title","image_path","auid", "details", "short_link"]
+    list_display = ["file_name", "date_created","title","image_path","auid", "details", "short_link", "hyperlink", "action"]
+
 
     class meta:
         model = Pictureurl

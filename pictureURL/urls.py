@@ -12,11 +12,11 @@ urlpatterns = [
     path('AllCampaigns/', campaign_list, name="campaign_list"),
     path('campaigndetail/<slug:auid>', campaigndetail, name='campaigndetail'),
     path("NewCampaign/", Upload_Campaign.as_view(),  name="new_campaign"),
-    path("Edit/<int:id>/update", EditListView.as_view(), name="edit_campaign"),
+    path("edit/<int:id>/", EditListView.as_view(), name="edit_campaign"),
     path("Delete_Campaign/<int:pk>/", delete_campaign, name="delete_campaign"),
-    path("smsform/<slug:auid>", Publish.as_view(),  name="textform"),
-    path("Result/", search, name="search"),
-    path("Calender/", calender, name="calender")
+    path("smsform/", Publish.as_view(),  name="textform"),
+    path("result/", search, name="search"),
+    # path("Calender/", calender, name="calender")
 
 
 ]

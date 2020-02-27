@@ -16,20 +16,20 @@
                                 <div class="row el-element-overlay m-b-20">
 
                                     <!-- /.usercard -->
-                                    {% for photo in allphoto %}
+                                    {% for item in items %}
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                                         <div class="white-box">
                                             <div class="el-card-item">
-                                                <div class="el-card-avatar el-overlay-1 h250"> <img src="/static/hbb/{{photo.image_path}}" />
+                                                <div class="el-card-avatar el-overlay-1 h250"> <img src="/static/hbb/{{item.image_path}}" />
                                                     <div class="el-overlay">
                                                         <ul class="el-info">
-                                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/hbb/{{photo.image_path}}"><i class="icon-magnifier-add"></i></a></li>
-                                                            <li><a class="btn default btn-outline" href="{% url 'delete_campaign' photo.pk %}"><i class="icon-trash"></i></a></li>
+                                                            <li><a class="btn default btn-outline image-popup-vertical-fit" href="/static/hbb/{{item.image_path}}"><i class="icon-magnifier-add"></i></a></li>
+                                                            <li><a class="btn default btn-outline" href="{% url 'delete_campaign' item.pk %}"><i class="icon-trash"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="el-card-content">
-                                                    <h3 class="box-title f-18"> Name: {{ photo.title }}</h3> <small> Created On : {{ photo.date_created }}</small>
+                                                    <h3 class="box-title f-18"> Name: {{ item.title }}</h3> <small> Created On : {{ item.date_created }}</small>
                                                     <br/> 
                                                 </div>
                                             </div>
@@ -72,25 +72,25 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            {% for photo in allphoto %}
+                                            {% for item in items %}
                                             <td>
-                                                <a href="{% url 'campaign_banner' photo.auid %}" target="_blank" class="text-link" id="copyInput"> {{ photo.short_link }}</a>
+                                                <a href="{% url 'campaign_banner' item.auid %}" target="_blank" class="text-link" id="copyInput"> {{ item.short_link }}</a>
                                                 <span class="float-right" onclick="copyFunction"><i class="btn-link btn-copy icon-docs fa-fw copy-icon font-16" aria-hidden="true"></i></span>
                                             </td>
-                                            <td>{{photo.title}}</td>
-                                            <td> <span class="text-muted"> <i class="fa fa-clock-o"></i>&nbsp; {{ photo.date_created }}</span> </td>
+                                            <td>{{item.title}}</td>
+                                            <td> <span class="text-muted"> <i class="fa fa-clock-o"></i>&nbsp; {{ item.date_created }}</span> </td>
                                             <td>
-                                                <a href="/smsform/{{photo.auid}}"
+                                                <a href="/smsform"
                                                     class="btn btn-default btn-outline btn-success btn-white font-16"><i
                                                         class="fa  fa-location-arrow" aria-hidden="true"></i></a>
                                             </td>
                                             <td>
-                                                <a href="/edit/{{photo.id}};"
+                                                <a href="/edit/{{item.id}}"
                                                     class="btn btn-default btn-outline btn-warning font-16"><i
                                                         class="fa fa-edit" aria-hidden="true"></i></a>
                                             </td>
                                             <td>
-                                                <a href="/campaigndetail/{{photo.auid}}"
+                                                <a href="/campaigndetail/{{item.auid}}"
                                                     class="btn btn-default btn-outline btn-primary font-16"><i
                                                         class="fa fa-chain" aria-hidden="true"></i></a>
                                             </td>
@@ -99,13 +99,28 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <ul class="pagination">
-                                <li class="disabled"> <a href="#">1</a> </li>
-                                <li class="active"> <a href="#">2</a> </li>
-                                <li> <a href="#">3</a> </li>
-                                <li> <a href="#">4</a> </li>
-                                <li> <a href="#">5</a> </li>
-                            </ul>
+                            {% if items.has_other_pages %}
+                                <ul class="pagination">
+                                    {% if items.has_previous %}
+                                        <li><a href="?page={{ items.previous_page_number }}">&laquo;</a></li>
+                                    {% else %}
+                                        <li class="disabled"><span>&laquo;</span></li>
+                                    {% endif %}
+                                    {% for i in items.paginator.page_range %}
+                                        {% if items.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only">(current) 1 </span></span></li>
+                                        {% else %}
+                                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if items.has_next %}
+                                        <li><a href="?page={{ items.next_page_number }}">&raquo;</a></li>
+                                    {% else %}
+                                        <li class="disabled"><span>&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>
