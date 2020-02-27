@@ -92,7 +92,7 @@ if DEBUG:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopy2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'novaadsdb',
             'USER': 'novaadmin',
             'PASSWORD': 'Sysadmin321!',
