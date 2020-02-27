@@ -82,14 +82,24 @@ WSGI_APPLICATION = 'scannerr.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopy2',
+            'NAME': 'novaadsdb',
+            'USER': 'novaadmin',
+            'PASSWORD': 'Sysadmin321!',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -131,11 +141,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
 # MEDIA_URL = '/Users/user/Documents/hbb/'
-MEDIA_URL = 'app/airtel/static/hbb/'
+MEDIA_URL = 'root/novapp/airtel/static/hbb/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # django_heroku.settings(locals())
