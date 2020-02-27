@@ -12,7 +12,7 @@ class Pictureurl(models.Model):
     file_name = models.CharField(max_length=100)
     short_link = models.CharField(max_length=50, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    hyperlink = models.CharField(max_length=220, null=True )
+    hyperlink = models.CharField(max_length=220, null=True)
     action = models.CharField(max_length=13, null=True)
 
     def __str__(self):
@@ -42,6 +42,5 @@ class Analytics (models.Model):
     objects = AnalyticsManager()
 
     def __str__(self):
-        return self.campaign_url
-
+        return self.count
 

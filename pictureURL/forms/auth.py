@@ -20,9 +20,7 @@ class UserLoginForm(forms.Form):
 class UploadphotoForm(forms.Form):
     class Meta:
         model = Pictureurl
-        fields = ["title", "details", "hyperlink", "image_path", "action"
-
-                  ]
+        fields = ["title", "details", "hyperlink", "image_path", "action"]
 
 
 class EditphotoForm(forms.ModelForm):
