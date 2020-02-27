@@ -65,11 +65,9 @@ def logout(request):
 @login_required
 def dashboard(request):
     template = 'home.html'
-    # allphoto = Pictureurl.objects.all()
 
     context = {'title':'Dashboard',
-               'user':request.user,
-               # "allphoto": allphoto,
+               'user': request.user,
                }
     return render(request, template, context)
 
@@ -159,7 +157,6 @@ def campaign_list(request):
         items = paginator.page(paginator.num_pages)
 
     context = {
-        # "allphoto": items,
         'title': 'All Campaigns',
         "items": items
     }

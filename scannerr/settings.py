@@ -25,7 +25,7 @@ SECRET_KEY = '3+drmpm!id+u9b*ele%vak$h%-jpbem=e5l6^e=v$-ad(&%(p%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1', ]
+ALLOWED_HOSTS = ['172.24.213.131','127.0.0.1', 'novacampaignapp.herokuapp.com']
 
 LOGIN_URL = "/login"
 
