@@ -23,7 +23,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'airtel/static').replace('\\', '/')
 SECRET_KEY = '3+drmpm!id+u9b*ele%vak$h%-jpbem=e5l6^e=v$-ad(&%(p%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '167.71.132.180']
 
