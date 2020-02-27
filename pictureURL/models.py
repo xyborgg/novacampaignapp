@@ -21,6 +21,17 @@ class Pictureurl(models.Model):
     class Meta:
         ordering = ["-date_created"]
 
+
+class AnalyticsManager(models.Manager):
+    def create_event(self, instance):
+        if isinstance(instance, Pictureurl):
+            obj, created = self.get_or_create(instance=instance)
+            obj.count =+ 1
+            obj.save()
+            return obj.count
+        return None
+
+
 class Analytics (models.Model):
     device = models.CharField(max_length=50, null=True)
     ip = models.CharField(max_length=250)
@@ -28,5 +39,9 @@ class Analytics (models.Model):
     timestamps = models.DateTimeField(auto_now_add=True)
     count = models.IntegerField(default=0)
 
+    objects = AnalyticsManager()
+
     def __str__(self):
         return self.campaign_url
+
+
