@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
 # MEDIA_URL = '/Users/user/Documents/hbb/'
-MEDIA_URL = '/airtel/static/hbb/'
+MEDIA_URL = 'app/airtel/static/hbb/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 

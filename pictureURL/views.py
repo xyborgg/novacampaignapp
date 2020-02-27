@@ -117,14 +117,13 @@ class Upload_Campaign(View):
             picture.short_link = file_url
 
         _file = request.FILES['file']
-        picture.file_name = _file.name
         file_extension = os.path.splitext(_file.name)[1]
+        picture.file_name = _file.name
         media_type = None
         if file_extension in image_ext:
             media_type = 'image'
         elif file_extension in video_ext:
             media_type = 'video'
-
         if not media_type:
             messages.add_message(request, messages.ERROR, "Invalid Media Uploaded - Only Image | Video Supported")
             return redirect('/NewCampaign')
