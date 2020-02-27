@@ -135,7 +135,7 @@ MEDIA_URL = 'app/airtel/static/hbb'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # django_heroku.settings(locals())
